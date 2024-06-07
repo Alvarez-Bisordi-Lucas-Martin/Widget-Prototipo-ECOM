@@ -215,8 +215,8 @@
 .chat-msg.self > .cm-msg-text {
     float: right;
     margin-right: 10px;
-    background: #5A5EB9;
-    color: white;
+    background: white;
+    color: #666;
 }
 
 .cm-msg-button>ul>li {
