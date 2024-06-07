@@ -1,19 +1,9 @@
 (function() {
-    //Función para obtener los parámetros de la URL.
-    function getQueryParams() {
-        var params = {};
-        var queryString = window.location.search.slice(1);
-        var regex = /([^&=]+)=([^&]*)/g;
-        var m;
-        while (m = regex.exec(queryString)) {
-            params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-        }
-        return params;
-    }
-
-    var params = getQueryParams();
-    var id = params.id || '';
-    var nombre = params.nombre || '';
+    //Obtener el id y el nombre desde los atributos data-id y data-nombre del script.
+    var scripts = document.getElementsByTagName('script');
+    var currentScript = scripts[scripts.length - 1];
+    var id = currentScript.getAttribute('data-id');
+    var nombre = currentScript.getAttribute('data-nombre');
 
     //Función para cargar un archivo JS.
     function loadJS(url, callback) {
@@ -104,7 +94,7 @@
                         </div>
                         <div class="chat-input">
                             <form id="chat-form">
-                                <input type="text" id="chat-input" placeholder="Envía un mensaje..."/>
+                                <input type="text" id="chat-input" placeholder="Activa ECOM-IA..."/>
                                 <button type="submit" class="chat-submit" id="chat-submit">
                                     <i class="material-icons">send</i>
                                 </button>
