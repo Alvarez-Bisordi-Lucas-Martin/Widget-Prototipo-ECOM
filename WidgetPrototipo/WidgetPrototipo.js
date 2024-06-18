@@ -2,7 +2,7 @@ $(function() {
     var INDEX = 0;
     var entorno_actual = 'local';
     var url_tipo = 'base';
-
+    
     function loadJS(url, callback) {
         var script = document.createElement("script");
         script.src = url;
