@@ -19,7 +19,7 @@ function widget(client_id, client_secret, app_name) {
             link.href = url;
             document.head.appendChild(link);
         }
-        
+
         //Carga la lista de aplicaciones y realizar la validación.
         loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/UsuariosValidados.js', function() {
             var validacion = false;
@@ -84,7 +84,7 @@ function widget(client_id, client_secret, app_name) {
                         </div>
                         <div class="chat-box">
                             <div class="chat-box-header">
-                                ACTIVAR - ECOM IA - CHAT BOT
+                                ERROR DE ACTIVACIÓN
                                 <span class="chat-box-toggle">
                                     <i class="material-icons">close</i>
                                 </span>
@@ -95,7 +95,7 @@ function widget(client_id, client_secret, app_name) {
                             </div>
                             <div class="chat-input">
                                 <form id="chat-form">
-                                    <input type="text" id="chat-input" placeholder="Activa ECOM-IA..."/>
+                                    <input type="text" id="chat-input" placeholder="Envía un mensaje..."/>
                                     <button type="submit" class="chat-submit" id="chat-submit">
                                         <i class="material-icons">send</i>
                                     </button>

@@ -5,7 +5,7 @@ $(function() {
     $("#chat-form").submit(function(e) {
         e.preventDefault();
         var msg = $("#chat-input").val();
-        var msg_error = ("Chatbot desabilitado");
+        var msg_error = ("Para obtener asistencia, comunícate con el soporte técnico de Ecom");
         if (msg.trim() == '') {
             return false;
         }
