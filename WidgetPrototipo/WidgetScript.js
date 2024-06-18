@@ -1,4 +1,4 @@
-(function widget(client_id, client_secret, app_name) {
+function widget(client_id, client_secret, app_name) {
     this.client_id = client_id;
     this.client_secret = client_secret;
     this.app_name = app_name;
@@ -19,9 +19,9 @@
             link.href = url;
             document.head.appendChild(link);
         }
-
+        
         //Carga la lista de aplicaciones y realizar la validación.
-        loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Aplicaciones.js', function() {
+        loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/UsuariosValidados.js', function() {
             var validacion = false;
             
             if (typeof usuarios_validados !== 'undefined' && Array.isArray(usuarios_validados)) {
@@ -123,4 +123,4 @@
             }
         });
     };
-});
+}
