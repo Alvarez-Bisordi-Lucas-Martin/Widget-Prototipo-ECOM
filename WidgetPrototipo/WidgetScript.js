@@ -1,4 +1,4 @@
-$(function widget(client_id, client_secret, app_name) {
+(function widget(client_id, client_secret, app_name) {
     this.client_id = client_id;
     this.client_secret = client_secret;
     this.app_name = app_name;
@@ -11,7 +11,7 @@ $(function widget(client_id, client_secret, app_name) {
             script.onload = callback;
             document.head.appendChild(script);
         }
-
+        
         //Función para cargar un archivo CSS.
         function loadCSS(url) {
             var link = document.createElement("link");
