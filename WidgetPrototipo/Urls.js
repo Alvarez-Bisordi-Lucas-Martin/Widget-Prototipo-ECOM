@@ -1,6 +1,6 @@
 const valores_de_entorno = {
     "local": {
-        "base": "http://127.0.0.1:8000/api/mensajes/"
+        "base": "http://localhost:8000/api/mensajes/"
     },
     "test": {
         "base": "https://chatbot.ecomdev.ar/api/v1/"
