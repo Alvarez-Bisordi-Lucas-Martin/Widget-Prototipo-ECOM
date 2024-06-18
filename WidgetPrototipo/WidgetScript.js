@@ -78,28 +78,30 @@ function widget(client_id, client_secret, app_name) {
                 //Carga el WidgetError.
                 function createWidgetHTML() {
                     var widgetHTML = `
-                        <div id="chat-circle" class="btn btn-raised">
-                            <div id="chat-overlay"></div>
-                            <i class="material-icons">feedback</i>
-                        </div>
-                        <div class="chat-box">
-                            <div class="chat-box-header">
-                                ERROR DE ACTIVACIÓN
-                                <span class="chat-box-toggle">
-                                    <i class="material-icons">close</i>
-                                </span>
+                        <div class="widget-container">
+                            <div id="chat-circle" class="btn btn-raised">
+                                <div id="chat-overlay"></div>
+                                <i class="material-icons">feedback</i>
                             </div>
-                            <div class="chat-box-body">
-                                <div class="chat-box-overlay"></div>
-                                <div class="chat-logs"></div>
-                            </div>
-                            <div class="chat-input">
-                                <form id="chat-form">
-                                    <input type="text" id="chat-input" placeholder="Envía un mensaje..."/>
-                                    <button type="submit" class="chat-submit" id="chat-submit">
-                                        <i class="material-icons">send</i>
-                                    </button>
-                                </form>
+                            <div class="chat-box">
+                                <div class="chat-box-header">
+                                    ERROR DE ACTIVACIÓN
+                                    <span class="chat-box-toggle">
+                                        <i class="material-icons">close</i>
+                                    </span>
+                                </div>
+                                <div class="chat-box-body">
+                                    <div class="chat-box-overlay"></div>
+                                    <div class="chat-logs"></div>
+                                </div>
+                                <div class="chat-input">
+                                    <form id="chat-form">
+                                        <input type="text" id="chat-input" placeholder="Envía un mensaje..."/>
+                                        <button type="submit" class="chat-submit" id="chat-submit">
+                                            <i class="material-icons">send</i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     `;
