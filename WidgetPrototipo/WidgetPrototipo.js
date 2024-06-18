@@ -30,15 +30,20 @@ $(function() {
                 success: function(response) {
                     console.log('Mensaje enviado:', response);
                     //Obtiene el ID del mensaje creado en la respuesta.
-                    var idMensaje = response.id;
-                    obtenerMensajeDuplicado(idMensaje);
+                    /*var idMensaje = response.id;
+                    obtenerMensajeDuplicado(idMensaje);*/
+                    setTimeout(function() {
+                        //Genera el mensaje duplicado en el chat.
+                        generate_message(response.contenido, 'user');
+                        //Retraso de 1 segundo antes de mostrar el mensaje duplicado.
+                    }, 1000);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error al enviar mensaje:', error);
                 }
             });
         });
-
+        
         //Función para generar un mensaje en el chat.
         function generate_message(msg, type) {
             INDEX++;
@@ -68,7 +73,7 @@ $(function() {
         }
 
         //Función para obtener el mensaje duplicado desde la API.
-        function obtenerMensajeDuplicado(idMensaje) {
+        /*function obtenerMensajeDuplicado(idMensaje) {
             $.ajax({
                 url: get_url(entorno_actual, url_tipo) + idMensaje + '/',
                 type: 'GET',
@@ -85,8 +90,8 @@ $(function() {
                     console.error('Error al obtener mensaje duplicado:', error);
                 }
             });
-        }
-
+        }*/
+        
         //Función para obtener la fecha y hora actual formateada.
         function getFormattedDate() {
             const now = new Date();
