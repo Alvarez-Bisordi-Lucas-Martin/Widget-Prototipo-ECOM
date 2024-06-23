@@ -27,13 +27,13 @@ $(function() {
                 success: function(response) {
                     console.log('Mensaje enviado:', response);
                     //Genera el mensaje en el chat como propio ('self').
-                    generarMensaje(response.contenido, 'self', response.timestamp);
+                    generarMensaje(response.contenido, 'self', formatearFecha(response.timestamp));
                     //Guarda el mensaje enviado en localStorage.
                     guardarMensajes(response.contenido, 'self', formatearFecha(response.timestamp));
                     //Simula la respuesta del usuario después de 1 segundo.
                     setTimeout(function() {
                         //Genera el mensaje duplicado en el chat.
-                        generarMensaje(response.contenido, 'user', response.timestamp);
+                        generarMensaje(response.contenido, 'user', formatearFecha(response.timestamp));
                         //Guarda el mensaje duplicado en localStorage.
                         guardarMensajes(response.contenido, 'user', formatearFecha(response.timestamp));
                     }, 1000);
@@ -89,6 +89,9 @@ $(function() {
 
         //Función para obtener la fecha y hora actual formateada.
         function formatearFecha(fecha) {
+            if (!(fecha instanceof Date)) {
+                fecha = new Date(fecha);
+            }
             const dia = String(fecha.getDate()).padStart(2, '0');
             const mes = String(fecha.getMonth() + 1).padStart(2, '0');
             const anio = fecha.getFullYear();
