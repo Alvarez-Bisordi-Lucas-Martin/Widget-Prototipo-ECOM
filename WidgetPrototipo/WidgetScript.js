@@ -11,7 +11,7 @@ function widget(client_id, client_secret, app_name) {
             script.onload = callback;
             document.head.appendChild(script);
         }
-        
+
         //Función para cargar un archivo CSS.
         function cargarCSS(url) {
             var link = document.createElement("link");
@@ -20,6 +20,48 @@ function widget(client_id, client_secret, app_name) {
             document.head.appendChild(link);
         }
         
+        cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Urls.js', function() {
+            var token = null;
+            var entorno_actual = 'local';
+            var validacion = false;
+
+            //Obtiene el token de validación.
+            $.ajax({
+                url: get_url_token(entorno_actual),
+                type: 'GET',
+                data: {
+                    client_id: client_id,
+                    client_secret: client_secret
+                },
+                success: function(response) {
+                    console.log('Token obtenido:', response);
+                    token = response.token;
+
+                    //Valida la aplicación.
+                    $.ajax({
+                        url: get_url_app(entorno_actual),
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        },
+                        data: {
+                            app_name: app_name
+                        },
+                        success: function(response) {
+                            console.log('Información de la aplicación obtenida:', response);
+                            validacion = true;
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error al obtener información de la aplicación:', error);
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al obtener token:', error);
+                }
+            });
+        });
+
         //Carga la lista de aplicaciones y realizar la validación.
         cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/UsuariosValidados.js', function() {
             var validacion = false;
