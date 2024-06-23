@@ -5,7 +5,7 @@ function widget(client_id, client_secret, app_name) {
     
     this.start = function() {
         //Función para cargar un archivo JS.
-        function loadJS(url, callback) {
+        function cargarJS(url, callback) {
             var script = document.createElement("script");
             script.src = url;
             script.onload = callback;
@@ -13,15 +13,15 @@ function widget(client_id, client_secret, app_name) {
         }
         
         //Función para cargar un archivo CSS.
-        function loadCSS(url) {
+        function cargarCSS(url) {
             var link = document.createElement("link");
             link.rel = "stylesheet";
             link.href = url;
             document.head.appendChild(link);
         }
-
+        
         //Carga la lista de aplicaciones y realizar la validación.
-        loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/UsuariosValidados.js', function() {
+        cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/UsuariosValidados.js', function() {
             var validacion = false;
             
             if (typeof usuarios_validados !== 'undefined' && Array.isArray(usuarios_validados)) {
@@ -30,7 +30,7 @@ function widget(client_id, client_secret, app_name) {
             
             if (validacion) {
                 //Carga el WidgetPrototipo.
-                function createWidgetHTML() {
+                function crearWidgetHTML() {
                     var widgetHTML = `
                         <div class="widget-container">
                             <div id="chat-circle" class="btn btn-raised">
@@ -63,22 +63,22 @@ function widget(client_id, client_secret, app_name) {
                     widgetContainer.innerHTML = widgetHTML;
                 }
                 
-                loadJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
-                    loadCSS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetPrototipo.css');
-                    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
-                    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
-                    loadCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
-                    loadJS('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', function() {
-                        loadJS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', function() {
-                            loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetPrototipo.js', function(){
-                                createWidgetHTML();
+                cargarJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
+                    cargarCSS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetPrototipo.css');
+                    cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
+                    cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
+                    cargarCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
+                    cargarJS('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', function() {
+                        cargarJS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', function() {
+                            cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetPrototipo.js', function(){
+                                crearWidgetHTML();
                             });
                         });
                     });
                 });
             } else {
                 //Carga el WidgetError.
-                function createWidgetHTML() {
+                function crearWidgetHTML() {
                     var widgetHTML = `
                         <div class="widget-container">
                             <div id="chat-circle" class="btn btn-raised">
@@ -111,15 +111,15 @@ function widget(client_id, client_secret, app_name) {
                     widgetContainer.innerHTML = widgetHTML;
                 }
                 
-                loadJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
-                    loadCSS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetError.css');
-                    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
-                    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
-                    loadCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
-                    loadJS('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', function() {
-                        loadJS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', function() {
-                            loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetError.js', function(){
-                                createWidgetHTML();
+                cargarJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
+                    cargarCSS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetError.css');
+                    cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
+                    cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
+                    cargarCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
+                    cargarJS('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', function() {
+                        cargarJS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', function() {
+                            cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/WidgetError.js', function(){
+                                crearWidgetHTML();
                             });
                         });
                     });

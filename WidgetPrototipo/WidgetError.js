@@ -1,60 +1,59 @@
 $(function() {
-    var INDEX = 0;
+    var index = 0;
 
     //Maneja el evento de envío del formulario del chat.
     $("#chat-form").submit(function(e) {
         e.preventDefault();
-        var msg = $("#chat-input").val();
-        var msg_error = ("Para obtener asistencia, comunícate con el soporte técnico de Ecom");
-        if (msg.trim() == '') {
+        var contenido = $("#chat-input").val();
+        var contenido_error = ("Para obtener asistencia, comunícate con el soporte técnico de Ecom");
+        if (contenido.trim() == '') {
             return false;
         }
         //Genera el mensaje en el chat como propio ('self').
-        generate_message(msg, 'self');
+        generarMensaje(contenido, 'self');
+        //Simula la respuesta del usuario después de 1 segundo.
         setTimeout(function() {
-            //Simula la respuesta del usuario después de 1 segundo.
-            generate_message(msg_error, 'user');
+            generarMensaje(contenido_error, 'user');
         }, 1000);
     });
 
     //Función para generar un mensaje en el chat.
-    function generate_message(msg, type) {
-        INDEX++;
+    function generarMensaje(contenido, tipo) {
+        index++;
         var str = "";
         //Selecciona el avatar según el tipo de mensaje ('self' o 'user').
-        var senderAvatarUrl = (type === 'self') ? "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Perfil.jpg" : "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Ecom.png";
+        var perfil_imagen = (tipo === 'self') ? "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Perfil.jpg" : "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Ecom.png";
         
-        var timestamp = getFormattedDate();
+        var fecha = formatearFecha(new Date());
 
         //Construye el HTML del mensaje.
-        str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
+        str += "<div id='cm-msg-" + index + "' class=\"chat-msg " + tipo + "\">";
         str += "          <span class=\"msg-avatar\">";
-        str += "            <img src=\"" + senderAvatarUrl + "\">";
+        str += "            <img src=\"" + perfil_imagen + "\">";
         str += "          </span>";
         str += "          <div class=\"cm-msg-text\">";
-        str += msg;
-        str += "            <div class=\"timestamp\">" + timestamp + "</div>";
+        str += contenido;
+        str += "            <div class=\"timestamp\">" + fecha + "</div>";
         str += "          </div>";
         str += "        </div>";
         
         $(".chat-logs").append(str);
-        $("#cm-msg-" + INDEX).hide().fadeIn(300);
-        if (type == 'self') {
+        $("#cm-msg-" + index).hide().fadeIn(300);
+        if (tipo == 'self') {
             $("#chat-input").val('');
         }
         $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
     }
-
+    
     //Función para obtener la fecha y hora actual formateada.
-    function getFormattedDate() {
-        const now = new Date();
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = now.getFullYear();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-
-        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    function formatearFecha(fecha) {
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+        const anio = fecha.getFullYear();
+        const horas = String(fecha.getHours()).padStart(2, '0');
+        const minutos = String(fecha.getMinutes()).padStart(2, '0');
+        
+        return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
     }
 
     //Maneja el evento de clic en el botón de alternar la visibilidad de la caja del chat.

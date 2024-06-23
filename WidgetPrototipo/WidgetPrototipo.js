@@ -1,107 +1,82 @@
 $(function() {
-    var INDEX = 0;
+    var index = 0;
     var entorno_actual = 'local';
-    var url_tipo = 'base';
     
-    function loadJS(url, callback) {
+    function cargarJS(url, callback) {
         var script = document.createElement("script");
         script.src = url;
         script.onload = callback;
         document.head.appendChild(script);
     }
-    
-    loadJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Urls.js', function() {
+
+    cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Urls.js', function() {
         //Maneja el evento de envío del formulario del chat.
         $("#chat-form").submit(function(e) {
             e.preventDefault();
-            var msg = $("#chat-input").val();
-            if (msg.trim() == '') {
+            var contenido = $("#chat-input").val();
+            if (contenido.trim() == '') {
                 return false;
             }
-            //Genera el mensaje en el chat como propio ('self').
-            generate_message(msg, 'self');
-            
+
             //Envía el mensaje a la API REST en localhost.
             $.ajax({
-                url: get_url(entorno_actual, url_tipo),
+                url: get_url_mensaje(entorno_actual),
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ contenido: msg }),
+                data: JSON.stringify({ contenido: contenido }),
                 success: function(response) {
                     console.log('Mensaje enviado:', response);
-                    //Obtiene el ID del mensaje creado en la respuesta.
-                    /*var idMensaje = response.id;
-                    obtenerMensajeDuplicado(idMensaje);*/
+                    //Genera el mensaje en el chat como propio ('self').
+                    generarMensaje(response.contenido, 'self', response.timestamp);
+                    //Simula la respuesta del usuario después de 1 segundo.
                     setTimeout(function() {
                         //Genera el mensaje duplicado en el chat.
-                        generate_message(response.contenido, 'user');
-                        //Retraso de 1 segundo antes de mostrar el mensaje duplicado.
+                        generarMensaje(response.contenido, 'user', response.timestamp);
                     }, 1000);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error al enviar mensaje:', error);
+                    //Genera un mensaje de error en el chat.
+                    generarMensaje("Error al enviar mensaje", 'user', formatearFecha(new Date()));
                 }
             });
         });
-        
+
         //Función para generar un mensaje en el chat.
-        function generate_message(msg, type) {
-            INDEX++;
+        function generarMensaje(contenido, tipo, fecha) {
+            index++;
             var str = "";
             //Selecciona el avatar según el tipo de mensaje ('self' o 'user').
-            var senderAvatarUrl = (type === 'self') ? "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Perfil.jpg" : "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Ecom.png";
-            
-            var timestamp = getFormattedDate();
+            var perfil_imagen = (tipo === 'self') ? "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Perfil.jpg" : "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/WidgetPrototipo/Images/Ecom.png";
 
             //Construye el HTML del mensaje.
-            str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
+            str += "<div id='cm-msg-" + index + "' class=\"chat-msg " + tipo + "\">";
             str += "          <span class=\"msg-avatar\">";
-            str += "            <img src=\"" + senderAvatarUrl + "\">";
+            str += "            <img src=\"" + perfil_imagen + "\">";
             str += "          </span>";
             str += "          <div class=\"cm-msg-text\">";
-            str += msg;
-            str += "            <div class=\"timestamp\">" + timestamp + "</div>";
+            str += contenido;
+            str += "            <div class=\"timestamp\">" + fecha + "</div>";
             str += "          </div>";
             str += "        </div>";
-            
+
             $(".chat-logs").append(str);
-            $("#cm-msg-" + INDEX).hide().fadeIn(300);
-            if (type == 'self') {
+            $("#cm-msg-" + index).hide().fadeIn(300);
+            if (tipo == 'self') {
                 $("#chat-input").val('');
             }
             $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight }, 1000);
         }
 
-        //Función para obtener el mensaje duplicado desde la API.
-        /*function obtenerMensajeDuplicado(idMensaje) {
-            $.ajax({
-                url: get_url(entorno_actual, url_tipo) + idMensaje + '/',
-                type: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    console.log('Mensaje duplicado:', response);
-                    setTimeout(function() {
-                        //Genera el mensaje duplicado en el chat.
-                        generate_message(response.contenido, 'user');
-                        //Retraso de 1 segundo antes de mostrar el mensaje duplicado.
-                    }, 1000);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error al obtener mensaje duplicado:', error);
-                }
-            });
-        }*/
-        
         //Función para obtener la fecha y hora actual formateada.
-        function getFormattedDate() {
-            const now = new Date();
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const year = now.getFullYear();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
+        function formatearFecha(fecha) {
+            const dia = String(fecha.getDate()).padStart(2, '0');
+            const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+            const anio = fecha.getFullYear();
+            const horas = String(fecha.getHours()).padStart(2, '0');
+            const minutos = String(fecha.getMinutes()).padStart(2, '0');
             
-            return `${day}/${month}/${year} ${hours}:${minutes}`;
+            return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
         }
 
         //Maneja el evento de clic en el botón de alternar la visibilidad de la caja del chat.
@@ -112,7 +87,7 @@ $(function() {
                 }
             });
         });
-
+        
         //Maneja el evento de clic en el círculo del chat.
         $("#chat-circle").click(function() {
             $("#chat-circle").hide('scale');
