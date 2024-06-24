@@ -19,11 +19,11 @@ $(function() {
             success: function(response) {
                 console.log('Mensaje enviado:', response);
                 //Genera el mensaje en el chat como propio ('self').
-                generarMensaje(response.contenido, 'self', formatearFecha(response.timestamp));
+                generarMensaje(response.contenido, 'self', formatearFecha(response.fecha));
                 //Simula la respuesta del usuario después de 1 segundo.
                 setTimeout(function() {
                     //Genera el mensaje duplicado en el chat.
-                    generarMensaje(response.contenido, 'user', formatearFecha(response.timestamp));
+                    generarMensaje(response.contenido, 'user', formatearFecha(response.fecha));
                 }, 1000);
             },
             error: function(xhr, status, error) {
