@@ -25,8 +25,32 @@ function widget(client_id, client_secret, app_name) {
                 var token = null;
                 var entorno_actual = 'local';
                 var validacion = false;
-    
-                //Obtiene el token de validación.
+
+                $.ajax({
+                    url: get_url_app(entorno_actual, app_name),
+                    type: 'GET',
+                    success: function(response) {
+                        console.log('Información de la aplicación obtenida:', response);
+                        validacion = true;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener información de la aplicación:', error);
+                    }
+                });
+
+                $.ajax({
+                    url: get_url_app(entorno_actual, "App Test"),
+                    type: 'GET',
+                    success: function(response) {
+                        console.log('Información de la aplicación obtenida:', response);
+                        validacion = true;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener información de la aplicación:', error);
+                    }
+                });
+
+                /*//Obtiene el token de validación.
                 $.ajax({
                     url: get_url_token(entorno_actual),
                     type: 'GET',
@@ -40,7 +64,7 @@ function widget(client_id, client_secret, app_name) {
     
                         //Valida la aplicación.
                         $.ajax({
-                            url: get_url_app(entorno_actual),
+                            url: get_url_app(entorno_actual, app_name),
                             type: 'GET',
                             headers: {
                                 'Authorization': 'Bearer ' + token
@@ -60,7 +84,7 @@ function widget(client_id, client_secret, app_name) {
                     error: function(xhr, status, error) {
                         console.error('Error al obtener token:', error);
                     }
-                });
+                });*/
             });
         });
         

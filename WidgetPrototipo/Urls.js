@@ -22,6 +22,6 @@ function get_url_token(entorno) {
     return get_url_base(entorno) + "token/";
 }
 
-function get_url_app(entorno) {
-    return get_url_base(entorno) + "app/";
+function get_url_app(entorno, app_name) {
+    return get_url_base(entorno) + "get_aplicacion/" + app_name + "/";
 }
