@@ -19,9 +19,9 @@ function get_url_mensaje(entorno) {
 }
 
 function get_url_token(entorno) {
-    return get_url_base(entorno) + "token/";
+    return get_url_base(entorno) + "aplicaciones/token/";
 }
 
 function get_url_app(entorno, app_name) {
-    return get_url_base(entorno) + "get_aplicacion/" + app_name + "/";
+    return get_url_base(entorno) + "aplicaciones/get_aplicacion/" + app_name + "/";
 }

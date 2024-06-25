@@ -25,7 +25,7 @@ function widget(client_id, client_secret, app_name) {
                 var token = null;
                 var entorno_actual = 'local';
                 var validacion = false;
-
+                /*
                 $.ajax({
                     url: get_url_app(entorno_actual, app_name),
                     type: 'GET',
@@ -48,9 +48,9 @@ function widget(client_id, client_secret, app_name) {
                     error: function(xhr, status, error) {
                         console.error('Error al obtener información de la aplicación:', error);
                     }
-                });
+                });*/
 
-                /*//Obtiene el token de validación.
+                //Obtiene el token de validación.
                 $.ajax({
                     url: get_url_token(entorno_actual),
                     type: 'GET',
@@ -84,7 +84,7 @@ function widget(client_id, client_secret, app_name) {
                     error: function(xhr, status, error) {
                         console.error('Error al obtener token:', error);
                     }
-                });*/
+                });
             });
         });
         
