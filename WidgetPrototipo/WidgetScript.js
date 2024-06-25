@@ -53,7 +53,7 @@ function widget(client_id, client_secret, app_name) {
                 //Obtiene el token de validación.
                 $.ajax({
                     url: get_url_token(entorno_actual),
-                    type: 'GET',
+                    type: 'POST',
                     data: {
                         client_id: client_id,
                         client_secret: client_secret
