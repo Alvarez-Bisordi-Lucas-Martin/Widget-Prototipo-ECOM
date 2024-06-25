@@ -15,7 +15,7 @@ function get_url_base(entorno) {
 }
 
 function get_url_mensaje(entorno) {
-    return get_url_base(entorno) + "mensajes/";
+    return get_url_base(entorno) + "mensajes/enviar/";
 }
 
 function get_url_token(entorno) {
