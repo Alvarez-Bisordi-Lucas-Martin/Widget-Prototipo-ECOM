@@ -22,7 +22,7 @@ $(function() {
         index++;
         var str = "";
         //Selecciona el avatar según el tipo de mensaje ('self' o 'user').
-        var perfil_imagen = (tipo === 'self') ? "Images/Perfil.jpg" : "Images/Ecom.png";
+        var perfil_imagen = (tipo === 'self') ? "../Images/Perfil.jpg" : "../Images/Ecom.png";
         
         var fecha = formatearFecha(new Date());
 

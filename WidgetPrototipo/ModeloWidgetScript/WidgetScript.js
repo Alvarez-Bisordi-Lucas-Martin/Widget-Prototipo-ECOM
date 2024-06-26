@@ -21,11 +21,10 @@ function widget(client_id, client_secret, app_name) {
         }
 
         cargarJS('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', function() {
-            cargarJS('Urls.js', function() {
+            cargarJS('../ModeloWidgetScript/Urls.js', function() {
                 var token = null;
                 var entorno_actual = 'local';
-                var validacion = false;
-
+                
                 //Obtiene el token de validación.
                 $.ajax({
                     url: get_url_token(entorno_actual),
@@ -36,8 +35,8 @@ function widget(client_id, client_secret, app_name) {
                     },
                     success: function(response) {
                         console.log('Token obtenido:', response);
-                        token = response.token;
-    
+                        token = response.data.access_token;
+
                         //Valida la aplicación.
                         $.ajax({
                             url: get_url_app(entorno_actual, app_name),
@@ -50,19 +49,21 @@ function widget(client_id, client_secret, app_name) {
                             },
                             success: function(response) {
                                 console.log('Información de la aplicación obtenida:', response);
-                                validacion = true;
+                                cargarWidgetPrototipo();
                             },
                             error: function(xhr, status, error) {
                                 console.error('Error al obtener información de la aplicación:', error);
+                                cargarWidgetError();
                             }
                         });
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al obtener token:', error);
+                        cargarWidgetError();
                     }
                 });
-
-                if (validacion) {
+                
+                function cargarWidgetPrototipo() {
                     //Carga el WidgetPrototipo.
                     function crearWidgetHTML() {
                         var widgetHTML = `
@@ -98,17 +99,19 @@ function widget(client_id, client_secret, app_name) {
                     }
                     
                     cargarJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
-                        cargarCSS('ModeloWidgetPrototipo/WidgetPrototipo.css');
+                        cargarCSS('../ModeloWidgetPrototipo/WidgetPrototipo.css');
                         cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
                         cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
                         cargarCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
                         cargarJS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', function() {
-                            cargarJS('WidgetPrototipo.js', function(){
+                            cargarJS('../ModeloWidgetScript/WidgetPrototipo.js', function(){
                                 crearWidgetHTML();
                             });
                         });
                     });
-                } else {
+                }
+
+                function cargarWidgetError() {
                     //Carga el WidgetError.
                     function crearWidgetHTML() {
                         var widgetHTML = `
@@ -144,12 +147,12 @@ function widget(client_id, client_secret, app_name) {
                     }
                     
                     cargarJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
-                        cargarCSS('ModeloWidgetError/WidgetError.css');
+                        cargarCSS('../ModeloWidgetError/WidgetError.css');
                         cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
                         cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
                         cargarCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
                         cargarJS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', function() {
-                            cargarJS('ModeloWidgetError/WidgetError.js', function(){
+                            cargarJS('../ModeloWidgetError/WidgetError.js', function(){
                                 crearWidgetHTML();
                             });
                         });
