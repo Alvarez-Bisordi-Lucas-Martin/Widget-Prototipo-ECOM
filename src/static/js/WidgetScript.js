@@ -27,7 +27,7 @@ function EcomWidget(client_id, client_secret, app_name, flujo_id=null, metadata=
         }
         
         cargarJS('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', function() {
-            cargarJS('../static/js/Urls.js', function() {
+            cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/js/Urls.js', function() {
                 // Obtiene el token de validación
                 fetch(get_url_token(), {
                     method: 'POST',
@@ -93,7 +93,7 @@ function EcomWidget(client_id, client_secret, app_name, flujo_id=null, metadata=
                     }
                     
                     cargarJS('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', function(){
-                        cargarCSS('../static/css/WidgetPrototipo.css');
+                        cargarCSS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/css/WidgetPrototipo.css');
                         cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
                         cargarCSS('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css');
                         cargarCSS('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -101,7 +101,7 @@ function EcomWidget(client_id, client_secret, app_name, flujo_id=null, metadata=
                             script.app_name = app_name;
                             script.flujo_id = flujo_id;
                             script.metadata = metadata;
-                            cargarJS('../static/js/WidgetPrototipo.js', function(){
+                            cargarJS('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/js/WidgetPrototipo.js', function(){
                                 crearWidgetHTML();
                             });
                         });
