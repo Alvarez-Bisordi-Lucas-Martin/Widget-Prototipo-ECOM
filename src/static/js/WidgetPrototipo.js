@@ -128,7 +128,7 @@ $(function() {
         var str = "";
         var i = 1;
         // Selecciona el avatar según el tipo de mensaje ('self' o 'user')
-        var perfil_imagen = (tipo === 'self') ? "../static/images/Perfil.jpg" : "../static/images/Ecom.png";
+        var perfil_imagen = (tipo === 'self') ? "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/images/Perfil.jpg" : "https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/images/Ecom.png";
         
         // Construye el HTML del mensaje
         str += "<div id='cm-msg-" + index + "' class=\"chat-msg " + tipo + "\">";
