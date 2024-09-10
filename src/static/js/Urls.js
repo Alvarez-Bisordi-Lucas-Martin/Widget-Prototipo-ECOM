@@ -10,7 +10,7 @@ const valores_de_entorno = {
     }
 };
 
-const entorno = "local";
+const entorno = "test";
 
 function get_url_base() {
     return valores_de_entorno[entorno]["base"];
