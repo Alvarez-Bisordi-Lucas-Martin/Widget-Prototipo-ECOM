@@ -93,7 +93,7 @@
 
 .widget-container .chat-box-body:after {
     content: "";
-    background-image: url('../images/FondoWidget.svg');
+    background-image: url('https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/images/FondoWidget.svg');
     opacity: 0.1;
     top: 0;
     left: 0;
