@@ -59,6 +59,9 @@ class Chatbot {
             console.error(`Container with id "${containerId}" not found.`);
             return;
         }
+               
+        this.chatbotBubble.style.display = 'none';
+        this.chatbotContainer.style.display = 'none';
     }
 
     crear_html() {
