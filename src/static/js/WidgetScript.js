@@ -38,7 +38,7 @@ function get_url_conversacion() {
 /************************************* SCRIPT *************************************/
 
 var script = {
-    app_name: null, flujo_id: null, metadata: null, token: null, valid: false, url_script: get_url_static()
+    app_name: null, flujo_id: null, metadata: null, token: null, valid: false, url_script: 'https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/'
 }
 
 function EcomWidget(client_id, client_secret, app_name, flujo_id=null, metadata=null) {
