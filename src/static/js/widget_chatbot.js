@@ -183,7 +183,7 @@ class Chatbot {
         const messageElement = document.createElement('div');
         messageElement.classList.add('chat-message', sender);
         
-        var imagen = (sender === 'user') ? `${this.url_static}images/Perfil.jpg` : `${this.url_static}images/Ecom.png`;
+        var imagen = (sender === 'user') ? `${this.url_static}images/perfil.jpg` : `${this.url_static}images/ecom.png`;
         let messageContent = `<span class="msg-avatar"><img src="${imagen}" alt="Avatar"></span>`;
 
         // Crear contenedor para el contenido del mensaje
