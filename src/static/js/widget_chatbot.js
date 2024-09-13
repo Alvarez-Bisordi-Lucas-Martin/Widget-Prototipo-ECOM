@@ -46,7 +46,7 @@ class Chatbot {
         this.flujo_id = flujo_id;
         this.metadata = JSON.stringify(metadata);
         this.valid = false;
-        this.url_static = get_url_static();
+        this.url_static = 'https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/';
         this.token = null;
         this.sesion_id = null;
         this.parametros = null;
