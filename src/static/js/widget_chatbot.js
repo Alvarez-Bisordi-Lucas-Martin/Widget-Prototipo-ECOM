@@ -109,6 +109,7 @@ class Chatbot {
         console.log("App Name: " + this.app_name);
         console.log("Flujo ID: " + this.flujo_id);
         console.log("Metadata: " + this.metadata);
+        console.log("Entorno Actual: " + entorno_actual);
         console.log("Imports URL Base: " + this.url_static);
         console.log(" ");
         console.log("************************ RESPONSES ************************");
