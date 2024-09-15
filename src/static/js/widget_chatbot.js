@@ -15,9 +15,8 @@ const valores_de_entorno = {
     }
 };
 
-var entorno_actual = "test";
-
-if (typeof config !== "undefined" && config.entorno_actual) { entorno_actual = config.entorno_actual }
+if (typeof config !== "undefined" && config.entorno_actual) { entorno_actual = config.entorno_actual; }
+else { var entorno_actual = "test"; }
 
 function get_url_base() {
     return valores_de_entorno[entorno_actual]["base"];
