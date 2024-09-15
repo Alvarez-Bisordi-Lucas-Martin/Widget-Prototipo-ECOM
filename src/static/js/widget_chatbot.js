@@ -56,7 +56,7 @@ class Chatbot {
         this.primer_mensaje = true;
 
         // Urls
-        this.url_static = get_url_static();
+        this.url_static = 'https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/';
 
         // Contenedores
         this.container = containerId;
