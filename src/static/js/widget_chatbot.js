@@ -62,28 +62,30 @@ class Chatbot {
         this.chatbotWidget = null;
         this.chatbotBubble = null;
         this.chatbotContainer = null;
+
+        // Shadow Dom
+        this.shadowRoot = null;
     }
 
     cargarCSS(urls, callback) {
         var urls_cargadas = 0;
         
-        urls.forEach(function(url) {
+        urls.forEach((url) => {
             var link = document.createElement("link");
             link.rel = "stylesheet";
             link.href = url;
-            link.onload = function() {
+            link.onload = () => {
                 urls_cargadas++;
                 if (urls_cargadas === urls.length) {
                     callback();
                 }
             };
-            document.head.appendChild(link);
+            this.shadowRoot.appendChild(link);
         });
     }
     
     start() {
         this.validate().then(() => {
-            
             const css = [
                 this.url_static + 'css/widget_chatbot.css'
             ];
@@ -101,6 +103,7 @@ class Chatbot {
             return;
         }
         this.container = document.getElementById(this.container);
+        this.shadowRoot = this.container.attachShadow({ mode: 'open' });
 
         console.log("*********************** WIDGET DATA ***********************");
         console.log(" ");
@@ -150,7 +153,7 @@ class Chatbot {
         } else {
             this.chatbotWidget.setAttribute('data-status', 'invalid');
         }
-        this.container.appendChild(this.chatbotWidget);
+        this.shadowRoot.appendChild(this.chatbotWidget);
 
         // Crear el burbuja del chatbot
         this.chatbotBubble = document.createElement('div');
@@ -193,11 +196,11 @@ class Chatbot {
         
         // Agregar eventos
         this.chatbotBubble.addEventListener('click', this.openChat.bind(this));
-        document.getElementById('chatbot-close').addEventListener('click', this.closeChat.bind(this));
-        document.getElementById('chatbot-send').addEventListener('click', this.sendMessage.bind(this));
-
+        this.shadowRoot.getElementById('chatbot-close').addEventListener('click', this.closeChat.bind(this));
+        this.shadowRoot.getElementById('chatbot-send').addEventListener('click', this.sendMessage.bind(this));
+    
         // Evento para enviar mensaje al presionar Enter
-        document.getElementById('chatbot-input').addEventListener('keypress', (event) => {
+        this.shadowRoot.getElementById('chatbot-input').addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 this.sendMessage();
             }
@@ -206,24 +209,24 @@ class Chatbot {
 
     openChat() {
         if (this.primer_mensaje && this.valid) {
-            document.getElementById("chatbot-input").disabled = true;
+            this.shadowRoot.getElementById("chatbot-input").disabled = true;
             // Mensaje Chatbot
             this.obtenerRespuestaAPI();
         }
         else if (this.primer_mensaje && !this.valid) {
-            document.getElementById("chatbot-input").disabled = true;
+            this.shadowRoot.getElementById("chatbot-input").disabled = true;
 
             setTimeout(() => {
                 // Mensaje Chatbot Error
                 this.addMessage({ contenido: "Para obtener asistencia, comunícate con el soporte técnico de Ecom", fecha_hora: new Date() }, 'bot');
-                document.getElementById("chatbot-input").disabled = false;
-                document.getElementById("chatbot-input").focus();
+                this.shadowRoot.getElementById("chatbot-input").disabled = false;
+                this.shadowRoot.getElementById("chatbot-input").focus();
             }, 1000);
 
             this.primer_mensaje = false;
         }
         else {
-            document.getElementById("chatbot-input").focus();
+            this.shadowRoot.getElementById("chatbot-input").focus();
         }
 
         this.chatbotContainer.style.display = 'flex';
@@ -236,10 +239,10 @@ class Chatbot {
     }
 
     sendMessage() {
-        const inputField = document.getElementById('chatbot-input');
+        const inputField = this.shadowRoot.getElementById('chatbot-input');
         const message = inputField.value.trim();
         if (message === '') return;
-        document.getElementById("chatbot-input").disabled = true;
+        this.shadowRoot.getElementById("chatbot-input").disabled = true;
 
         // Mostrar mensaje del usuario
         this.addMessage({ contenido: message, fecha_hora: new Date() }, 'user');
@@ -252,8 +255,8 @@ class Chatbot {
             setTimeout(() => {
                 // Mensaje Chatbot Error
                 this.addMessage({ contenido: "Para obtener asistencia, comunícate con el soporte técnico de Ecom", fecha_hora: new Date() }, 'bot');
-                document.getElementById("chatbot-input").disabled = false;
-                document.getElementById("chatbot-input").focus();
+                this.shadowRoot.getElementById("chatbot-input").disabled = false;
+                this.shadowRoot.getElementById("chatbot-input").focus();
             }, 1000);
         }
 
@@ -264,7 +267,7 @@ class Chatbot {
     addMessage(message, sender) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('chat-message', sender);
-        
+
         var bot = (this.valid) ? `${this.url_static}images/bot_valid.png` : `${this.url_static}images/bot_error.png`;
         var imagen = (sender === 'user') ? `${this.url_static}images/perfil.png` : bot;
         let messageContent = `<span class="msg-avatar"><img src="${imagen}" alt="Avatar"></span>`;
@@ -291,15 +294,15 @@ class Chatbot {
 
         // Cerrar el div del contenido
         messageContent += `</div>`;
-    
+
         // Asignar el contenido al elemento
         messageElement.innerHTML = messageContent;
-    
+
         // Añadir el nuevo mensaje al cuerpo del chat
-        document.getElementById('chatbot-body').appendChild(messageElement);
-    
+        var chatBody = this.shadowRoot.getElementById('chatbot-body');
+        chatBody.appendChild(messageElement);
+
         // Desplazarse hacia abajo al enviar mensaje
-        const chatBody = document.getElementById('chatbot-body');
         chatBody.scrollTop = chatBody.scrollHeight;
     }
     
@@ -361,8 +364,8 @@ class Chatbot {
             this.addMessage({ contenido: "Error al obtener el mensaje", fecha_hora: new Date() }, 'bot');
         }
 
-        document.getElementById("chatbot-input").disabled = false;
-        document.getElementById("chatbot-input").focus();
+        this.shadowRoot.getElementById("chatbot-input").disabled = false;
+        this.shadowRoot.getElementById("chatbot-input").focus();
     }
 
     // Función para obtener la fecha y hora actual formateada
@@ -381,9 +384,9 @@ class Chatbot {
 
     // Función para modificar el titulo del Chatbot
     modificar_titulo_widget() {
-        var title = document.querySelector('#chatbot-title');
+        var title = this.shadowRoot.querySelector('#chatbot-title');
         if (title) {
             title.textContent = this.parametros.titulo_chatbot;
         }
-    }    
+    }
 }
