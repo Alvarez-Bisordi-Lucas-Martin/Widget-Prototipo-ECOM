@@ -56,7 +56,7 @@ class Chatbot {
         this.sesion_guardada = null;
 
         // Urls
-        this.url_static = get_url_static();
+        this.url_static = 'https://alvarez-bisordi-lucas-martin.github.io/Widget-Prototipo-ECOM/src/static/'
         this.dominio = `${window.location.protocol}//${window.location.host}`;
 
         // Contenedores
