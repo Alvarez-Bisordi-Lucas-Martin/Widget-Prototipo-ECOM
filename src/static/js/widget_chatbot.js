@@ -134,6 +134,7 @@ class Chatbot {
             },
             body: JSON.stringify({
                 app_name: this.app_name,
+                dominio: this.dominio,
                 client_id: this.client_id,
                 client_secret: this.client_secret,
                 flujo_id: this.flujo_id
@@ -144,9 +145,7 @@ class Chatbot {
             if (response.status) {
                 console.log(response);
                 this.token = response.data.access_token;
-                if (this.dominio === response.data.dominio || this.dominio === 'file://') {
-                    this.valid = true;
-                }
+                this.valid = true;
                 this.parametros = response.data.parametros;
             } else {
                 console.error(response);
