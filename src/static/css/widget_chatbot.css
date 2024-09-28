@@ -197,7 +197,7 @@
     flex-grow: 1;
     padding: 10px;
     overflow-y: auto;
-    background-image: url('../images/fondo.svg');
+    background-image: url('https://ecom-chatbot-widget.ecomdev.ar/images/fondo.svg');
 }
 
 #chatbot-widget .chat-message {
