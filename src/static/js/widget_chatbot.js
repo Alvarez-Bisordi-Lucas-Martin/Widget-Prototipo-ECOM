@@ -482,6 +482,10 @@ class Chatbot {
                     chatbot_widget.style.setProperty('--height_user', '40px');
                     chatbot_widget.style.setProperty('--border_radius_user', '50%');
                 }
+            } else {
+                chatbot_widget.style.setProperty('--width_user', '40px');
+                chatbot_widget.style.setProperty('--height_user', '40px');
+                chatbot_widget.style.setProperty('--border_radius_user', '50%');
             }
 
             if (this.parametros.images.image_chatbot) {
@@ -491,10 +495,6 @@ class Chatbot {
                     chatbot_widget.style.setProperty('--border_radius_chatbot', '50%');
                 }
             }
-        } else {
-            chatbot_widget.style.setProperty('--width_user', '40px');
-            chatbot_widget.style.setProperty('--height_user', '40px');
-            chatbot_widget.style.setProperty('--border_radius', '50%');
         }
     }
 
