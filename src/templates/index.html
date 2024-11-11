@@ -20,12 +20,13 @@
     var script = document.createElement("script");
     script.src = config.url_script;
     script.onload = function() {
-      var client_id = config.client_id;
-      var client_secret = config.client_secret;
+      var api_key = config.api_key;
       var app_name = config.app_name;
       var flujo_id = config.flujo_id;
       var metadata = config.metadata;
-      var chatbot = new Chatbot('chatbot-root', client_id, client_secret, app_name, flujo_id, metadata);
+      var posicion = config.posicion;
+      var bubble_size = config.bubble_size;
+      var chatbot = new Chatbot('chatbot-root', api_key, app_name, flujo_id, metadata, posicion, bubble_size);
       chatbot.start();
     };
     document.head.appendChild(script);

@@ -1,1 +1,4 @@
+src/static/css/widget_chatbot.min.css
+src/static/js/widget_chatbot.min.js
 config.js
+/venv
